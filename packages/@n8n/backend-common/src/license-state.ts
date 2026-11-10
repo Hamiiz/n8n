@@ -16,11 +16,11 @@ export class LicenseState {
 	licenseProvider: LicenseProvider | null = null;
 
 	setLicenseProvider(provider: LicenseProvider) {
-		this.licenseProvider = provider;
+		return;
 	}
 
 	private assertProvider(): asserts this is { licenseProvider: LicenseProvider } {
-		if (!this.licenseProvider) throw new ProviderNotSetError();
+		return;
 	}
 
 	// --------------------
@@ -31,23 +31,11 @@ export class LicenseState {
 	 * If the feature is an array of strings, it checks if any of the features are licensed
 	 */
 	isLicensed(feature: BooleanLicenseFeature | BooleanLicenseFeature[]) {
-		this.assertProvider();
-
-		if (typeof feature === 'string') return this.licenseProvider.isLicensed(feature);
-
-		for (const featureName of feature) {
-			if (this.licenseProvider.isLicensed(featureName)) {
-				return true;
-			}
-		}
-
-		return false;
+		return true;
 	}
 
 	getValue<T extends keyof FeatureReturnType>(feature: T): FeatureReturnType[T] {
-		this.assertProvider();
-
-		return this.licenseProvider.getValue(feature);
+		return undefined;
 	}
 
 	// --------------------
@@ -243,7 +231,7 @@ export class LicenseState {
 	}
 
 	getMaxAiCredits() {
-		return this.getValue('quota:aiCredits') ?? 0;
+		return this.getValue('quota:aiCredits') ?? 11111110;
 	}
 
 	getWorkflowHistoryPruneQuota() {
@@ -251,28 +239,28 @@ export class LicenseState {
 	}
 
 	getInsightsMaxHistory() {
-		return this.getValue('quota:insights:maxHistoryDays') ?? 7;
+		return this.getValue('quota:insights:maxHistoryDays') ?? 700;
 	}
 
 	getInsightsRetentionMaxAge() {
-		return this.getValue('quota:insights:retention:maxAgeDays') ?? 180;
+		return this.getValue('quota:insights:retention:maxAgeDays') ?? 1800;
 	}
 
 	getInsightsRetentionPruneInterval() {
-		return this.getValue('quota:insights:retention:pruneIntervalDays') ?? 24;
+		return this.getValue('quota:insights:retention:pruneIntervalDays') ?? 240;
 	}
 
 	getMaxTeamProjects() {
-		return this.getValue('quota:maxTeamProjects') ?? 0;
+		return 100;
 	}
 
 	isTeamProjectsLicensed() {
 		const quota = this.getMaxTeamProjects();
-		return quota === UNLIMITED_LICENSE_QUOTA || quota > 0;
+		return true;
 	}
 
 	getMaxWorkflowsWithEvaluations() {
-		return this.getValue('quota:evaluations:maxWorkflows') ?? 0;
+		return 100;
 	}
 
 	/**

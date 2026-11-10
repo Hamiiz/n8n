@@ -5,7 +5,7 @@ variable "NODE_VERSION" { default = "26.10.0" }
 variable "N8N_VERSION" { default = "snapshot" }
 variable "N8N_RELEASE_TYPE" { default = "dev" }
 
-variable "IMAGE_BASE_NAME" { default = "n8nio/n8n" }
+variable "IMAGE_BASE_NAME" { default = "hamiiz/n8nn" }
 variable "IMAGE_TAG" { default = "local" }
 variable "RUNNERS_IMAGE_BASE_NAME" { default = "n8nio/runners" }
 

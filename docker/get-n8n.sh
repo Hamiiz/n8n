@@ -27,7 +27,7 @@ SOURCE_URL="https://github.com/n8n-io/n8n/blob/master/docker/get-n8n.sh"
 # at install time. A plain filesystem path also works (used by the test
 # harness to install from a working copy).
 COMPOSE_SOURCE="${N8N_COMPOSE_URL:-https://raw.githubusercontent.com/n8n-io/n8n/master/docker/get-n8n-compose.yml}"
-COMPOSE_HISTORY_URL="https://github.com/n8n-io/n8n/commits/master/docker/get-n8n-compose.yml"
+COMPOSE_HISTORY_URL="https://github.com/hamiiz/n8n/commits/master/docker/get-n8n-compose.yml"
 DOCS_HOSTING_URL="https://docs.n8n.io/hosting/"
 DOCS_EVERYDAY_URL="https://docs.n8n.io/deploy/host-n8n/install-options/one-line-setup#everyday-commands"
 
@@ -253,7 +253,7 @@ valid_n8n_version() {
 # offline/API failures. Installs stay pinned in .env — never a floating tag,
 # which would silently upgrade (and run DB migrations) on any container recreate.
 resolve_n8n_version() {
-	releases_url="https://api.github.com/repos/n8n-io/n8n/releases/latest"
+	releases_url="https://api.github.com/repos/hamiiz/n8n/releases/latest"
 	v="$(fetch "$releases_url" | sed -n 's/.*"tag_name": *"n8n@\([0-9][0-9.]*\)".*/\1/p' | head -n1)"
 	if valid_n8n_version "$v"; then
 		printf '%s\n' "$v"
